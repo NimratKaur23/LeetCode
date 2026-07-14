@@ -1,11 +1,9 @@
 class MyStack {
-    public:
-    queue<int> q1;
-    queue<int> q2;
-
 public:
+        queue<int> q1;
+        queue<int> q2;
     MyStack() {
-        
+       
     }
     
     void push(int x) {
@@ -23,14 +21,11 @@ public:
     int pop() {
         int ans=q1.front();
         q1.pop();
-
         return ans;
     }
     
     int top() {
-
         return q1.front();
-        
     }
     
     bool empty() {
