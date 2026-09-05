@@ -4,24 +4,22 @@ public:
         int low=0;
         int high=0;
         int ans=0;
-       // int count=0;
         map<char,int> m;
-
-        if(s.length()==1)
-          return 1;
 
         while(high<s.length()) {
             m[s[high]]++;
+            int k=high-low+1;
 
-            while(m[s[high]]>1) {
-                // int len=high-low;
-                // ans=max(ans,len);
+            while(m.size()<k) {
                 m[s[low]]--;
-                if(s[low]==0)
-                 m.erase(s[low]);
+                if(m[s[low]]==0)
+                  m.erase(s[low]);
                 low++;
+                k=high-low+1;
             }
 
+            //come out if size equal
+            //greater size of map is not possible
             int len=high-low+1;
             ans=max(ans,len);
             high++;
