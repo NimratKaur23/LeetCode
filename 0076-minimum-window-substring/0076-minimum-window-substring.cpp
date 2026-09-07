@@ -1,50 +1,48 @@
-#include<vector>
 class Solution {
 public:
-bool correct(vector<int> &arrS,vector<int> &arrT) {
-    for(int i=0;i<256;i++) {
-        if(arrS[i]<arrT[i])
+bool correct(vector<int> &S,vector<int> &T) {
+    for(int i=0;i<S.size();i++) {
+        if(S[i]<T[i])
           return false;
     }
 
     return true;
-    
 }
 
-    string minWindow(string s, string t) {
+    
+string minWindow(string s, string t) {
         int low=0;
         int high=0;
         int start=0;
-       
-
-        vector<int> arrS(256,0);
-        vector<int> arrT(256,0);
-        
-        int res=INT_MAX;
+        vector<int> S(256,0);
+        vector<int> T(256,0);
 
         for(int i=0;i<t.length();i++) {
-            arrT[t[i]]++;
+            T[t[i]]++;
         }
-        
+
+        int len=INT_MAX;
 
         while(high<s.length()) {
-            arrS[s[high]]++;
+            S[s[high]]++;
 
-            while(correct(arrS,arrT)) {
-                int len=high-low+1;
-                if(res>len) {
-                    res=len;
+            while(correct(S,T)) {
+                int currlen=high-low+1;
+
+                if(currlen<len) {
+                    len=currlen;
                     start=low;
                 }
-                arrS[s[low]]--;
+
+                S[s[low]]--;
                 low++;
             }
             high++;
         }
 
-        if(res==INT_MAX)
-          return "";
+        if(len == INT_MAX)
+            return "";
 
-        return s.substr(start,res);
+        return s.substr(start,len);
     }
 };
