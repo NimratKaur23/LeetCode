@@ -11,44 +11,39 @@
  */
 class Solution {
 public:
-    void isPath(TreeNode* root, int targetSum, int sum,bool &ans) {
-        
+void PathSum(TreeNode* root, int target, int sum, bool &ans) {
+    if(root==NULL)
+    return;
 
-        if(root==NULL) {
+    sum+=root->val;
+
+    if(root->left==NULL && root->right==NULL) {
+        if(sum==target) {
+            ans=true;
             return;
         }
-
-        sum+=root->val;
-
-        if(root->left==NULL && root->right==NULL) {
-            if(sum==targetSum) {
-                ans=true;
-                return;
-            }
-            else {
-                return;
-            }
-        }
-
-         isPath(root->left,targetSum,sum,ans);
-         isPath(root->right,targetSum,sum,ans);
-
-
     }
 
+    PathSum(root->left,target,sum,ans);
+    PathSum(root->right,target,sum,ans);
+
+    return ;
+
+
+}
     bool hasPathSum(TreeNode* root, int targetSum) {
+      bool ans=false;
 
-       bool ans=false; 
+      if(root==NULL)
+       return ans;
 
-        if(root==NULL) {
-            return ans;
-        }
+       int sum=0;
+      
+      PathSum(root,targetSum,sum,ans);
 
-        int sum=0;
+      return ans;
 
-        isPath(root,targetSum,sum,ans);
 
-        return ans;
         
     }
 };
