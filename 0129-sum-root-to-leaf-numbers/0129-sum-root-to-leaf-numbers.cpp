@@ -11,31 +11,25 @@
  */
 class Solution {
 public:
-    void func(TreeNode* root, int current, int &sum) {
+void SumNum(TreeNode* root, int curr, int &sum) {
+    if(root==NULL)
+    return;
 
-        if(root==NULL)
-         return;
-        
-        current=current*10+ root->val;
+    curr=curr*10+root->val;
 
-        if(root->left==NULL && root->right==NULL) {
-            sum+=current;
-            return;
-        }
-
-        func(root->left,current,sum);
-        func(root->right,current,sum);
-        
+    if(root->left==NULL && root->right==NULL) {
+        sum+=curr;
+        return;
     }
-
+    SumNum(root->left,curr,sum);
+    SumNum(root->right,curr,sum);
+}
 
     int sumNumbers(TreeNode* root) {
-        
         int sum=0;
-        func(root,0,sum);
+
+        SumNum(root,0,sum);
 
         return sum;
-        
-
     }
 };
